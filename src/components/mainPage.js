@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import p5 from "p5";
 import sketch from "../sketches/sketch.js";
 import { VoteClicked } from "../App";
+// import { getCount } from "../App";
 
 import {
   Button,
@@ -14,6 +15,12 @@ import {
   Label,
   FormGroup,
   Col,
+  Navbar,
+  NavbarBrand,
+  NavLink,
+  Nav,
+  NavItem,
+  CardText,
   CardImg,
   CardBody
 } from "reactstrap";
@@ -56,6 +63,7 @@ export default class MainPage extends React.Component {
   }
 
   render() {
+    console.log("hey", this.props.getCount())
     return (
       <div className="App">
         <header className="App-header">
@@ -63,6 +71,19 @@ export default class MainPage extends React.Component {
           <h1 className="App-title">Decentralized Design</h1>
         </header>
 
+
+        <div className="updater">
+          <Navbar color="faded" light expand="md" >
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                  <NavLink href="#" className="text-center">Voting in progress</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="#" className="text-center">Time: 00:00:00</NavLink>
+                </NavItem>
+              </Nav>
+          </Navbar>
+        </div>
         <Container className="App-Pack">
           <Row className="App-row">
             <Col sm="6" className="App-choices">
@@ -72,15 +93,12 @@ export default class MainPage extends React.Component {
                 <FormGroup row className="App-last">
                   {/* onClick={(e) => .VoteClicked(1, e)} */}
                   <Button
-                    color="primary"
-                    sm={10}
-                    onClick={e => this.props.VoteClicked(1, e)}
-                  >
+                    color="primary" sm={10} onClick={e => this.props.VoteClicked(0, e)} >
                     {" "}
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                    Total count: {this.count}
+                    Total count: {this.props.getCount().s}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -89,12 +107,12 @@ export default class MainPage extends React.Component {
               <CardBody className="App-choices-body">
                 <CardImg className="imgFlower" id="app2" />
                 <FormGroup row className="App-last">
-                  <Button color="primary" sm={10}>
+                  <Button color="primary" sm={10} onClick={e => this.props.VoteClicked(1, e)}>
                     {" "}
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                    Total count: 0
+                  Total count: {this.props.getCount().s}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -106,12 +124,12 @@ export default class MainPage extends React.Component {
               <CardBody>
                 <CardImg className="imgFlower" id="app3" />
                 <FormGroup row className="App-last">
-                  <Button color="primary" sm={10}>
+                  <Button color="primary" sm={10} onClick={e => this.props.VoteClicked(2, e)} >
                     {" "}
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                    Total count: 0
+                  Total count: {this.props.getCount().s}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -120,12 +138,12 @@ export default class MainPage extends React.Component {
               <CardBody className="App-choices-body">
                 <CardImg className="imgFlower" id="app4" />
                 <FormGroup row className="App-last">
-                  <Button color="primary" sm={10}>
+                  <Button color="primary" sm={10} onClick={e => this.props.VoteClicked(3, e)} >
                     {" "}
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                    Total count: 0
+                  Total count: {this.props.getCount().s}
                   </Label>
                 </FormGroup>
               </CardBody>

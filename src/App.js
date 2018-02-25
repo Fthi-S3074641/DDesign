@@ -5,7 +5,9 @@ import MainPage from "./components/mainPage";
 class App extends Component {
   constructor(probs) {
     super(probs);
-    this.VoteClicked = this.VoteClicked.bind(this);
+		this.VoteClicked = this.VoteClicked.bind(this);
+		// this.getCount = this.getCount.bind(this);
+		
   }
 
   count = 0;
@@ -45,15 +47,21 @@ class App extends Component {
     console.log("this is:", idd);
     console.log(this.web3.version.api);
     console.log(this.web3.eth.accounts);
-    this.myContractInstance.saveVote({ from: this.web3.eth.accounts[0] });
-    this.myContractInstance.saveVote({ from: this.web3.eth.accounts[1] });
+    this.myContractInstance.saveVote({ idd, from: this.web3.eth.accounts[0] });
+    this.myContractInstance.saveVote({ idd, from: this.web3.eth.accounts[1] });
     console.log(this.myContractInstance.getCount());
-		this.count = this.myContractInstance.getCount();
+		// this.count = this.myContractInstance.getCount.bind(this);
 		
   };
 
+	// getCount = () => {
+	// 	 this.myContractInstance.getCount;
+  // };
   render() {
-    return <MainPage VoteClicked={this.VoteClicked} />;
+		return <MainPage 
+			VoteClicked={this.VoteClicked} 
+			getCount={this.myContractInstance.getCount} 
+		/>;
   }
 }
 
