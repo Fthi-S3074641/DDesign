@@ -5,7 +5,8 @@ import App from "../App";
 import PropTypes from "prop-types";
 import p5 from "p5";
 import sketch from "../sketches/sketch.js";
-import { VoteClicked } from "../App";
+import { VoteClicked, ShowEvolution } from "../App";
+import {wrappedSketch} from '../sketch.js'
 // import { getCount } from "../App";
 
 import {
@@ -29,8 +30,24 @@ import {
 export default class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    // Obj = new App();
-  }
+    this.state = {
+      features: {
+        eyeSize: 10,
+        eyeWidth: 43,
+        eyeColour: "#bf8040",
+    
+        pettalLength: 0,
+        pettalWidth: 0,
+        pettalColour: "#e6ffff",
+        pettalSpacing: 15,
+    
+        mouth: false,
+    
+        centerColour: "#ffffcc",
+        centerSize: 100
+      },
+    };
+}
 
   static propTypes = {
     p5Props: PropTypes.object.isRequired,
@@ -39,10 +56,7 @@ export default class MainPage extends React.Component {
   };
 
   componentDidMount() {
-    this.canvas = new p5(sketch, "app1");
-    this.canvas = new p5(sketch, "app2");
-    this.canvas = new p5(sketch, "app3");
-    this.canvas = new p5(sketch, "app4");
+    
     
   }
 
@@ -62,10 +76,44 @@ export default class MainPage extends React.Component {
     this.canvas.remove();
   }
 
+  getEvolutionDetails(event) {
+      var a = this.props.ShowEvolution(0);
+      var a1 = this.props.ShowEvolution(1);
+      var a2 = this.props.ShowEvolution(2);
+      var a3 = this.props.ShowEvolution(3);
+
+      this.state = {
+        features: {
+          eyeSize: a1.c[1],
+          eyeWidth: a1.c[2],
+          eyeColour: "#bf8040",
+      
+          pettalLength: a1.c[3],
+          pettalWidth: a1.c[4],
+          pettalColour: "#e6ffff", // color not set yety
+          
+          pettalSpacing: 15,
+      
+          mouth: a1.c[0] == 0,
+      
+          centerColour: "#ffffcc",
+          centerSize: 100
+        }
+      };
+
+      const sketch = wrappedSketch(this.state.features);
+      this.canvas = new p5(sketch, "app1");
+      this.canvas = new p5(sketch, "app2");
+      this.canvas = new p5(sketch, "app3");
+      this.canvas = new p5(sketch, "app4");
+
+      console.log(a1);
+  }
+
   render() {
-    console.log("hey", this.props.getCount())
+    // console.log("hey", this.props.getCount())
     return (
-      <div className="App">
+      <div className="App" onLoad={this.getEvolutionDetails.bind(this)}>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Decentralized Design</h1>
@@ -98,7 +146,8 @@ export default class MainPage extends React.Component {
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                    Total count: {this.props.getCount().s}
+                    Total count:
+                     {/* {this.props.getCount().s} */}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -112,7 +161,8 @@ export default class MainPage extends React.Component {
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                  Total count: {this.props.getCount().s}
+                  Total count: 
+                  {/* {this.props.getCount().s} */}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -129,7 +179,8 @@ export default class MainPage extends React.Component {
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                  Total count: {this.props.getCount().s}
+                  Total count: 
+                  {/* {this.props.getCount().s} */}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -143,7 +194,8 @@ export default class MainPage extends React.Component {
                     Vote{" "}
                   </Button>
                   <Label for="exampleEmail" sm={4}>
-                  Total count: {this.props.getCount().s}
+                  Total count: 
+                  {/* {this.props.getCount().s} */}
                   </Label>
                 </FormGroup>
               </CardBody>
@@ -154,3 +206,4 @@ export default class MainPage extends React.Component {
     );
   }
 }
+

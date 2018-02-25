@@ -14,6 +14,9 @@
     color: white;
   }
   
+  .updater {
+    max-height: 20px;
+  }
   .App-title {
     font-size: 1.5em;
   }

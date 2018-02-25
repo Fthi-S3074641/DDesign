@@ -24,13 +24,14 @@ contract DecentralizedDesign is Voting, InteractiveGeneticAlgo {
     uint256 currentEvolution; 
     uint internal evolutionClosingTime;  // evolution closing time  
     uint populationSize;
-
+    event Testevent();
     event EvolutionFinished(Face[]); // fittest survivors, maybe show them on client when finished
 
     // CTOR, for now im just passing the population to 4, for now it could not be set 
     function DecentralizedDesign () public Voting(4) InteractiveGeneticAlgo(4) {
         currentEvolution = 0;
         populationSize = 4;
+        Testevent();
     }
 
     // resets evolution timer (Evolution = 20 minutes)
@@ -39,7 +40,7 @@ contract DecentralizedDesign is Voting, InteractiveGeneticAlgo {
     }
 
     // casting a vote to a particular face
-    function castVote(uint256 _faceId) public onlyWhenVotingOpen() {
+    function castVote(uint _faceId) public {
         // same issue here as explained in the Voting.sol in the voteForFace function
         if ((now > evolutionClosingTime)) {  
             resetEvolutionTimer();
@@ -63,5 +64,10 @@ contract DecentralizedDesign is Voting, InteractiveGeneticAlgo {
     // gets current evolution, total number of games/evolution done since contract deployed
     function getTotalEvolutions() public view returns (uint256) {
         return currentEvolution;
+    }
+
+    // this gets the current evo, pleb function
+    function getCurrentEvolution(uint256 _faceId) public view returns (uint256[6]) {      
+        return population[_faceId].dna;
     }
 }

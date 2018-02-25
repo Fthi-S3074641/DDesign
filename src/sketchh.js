@@ -1,4 +1,11 @@
-export default function sketch(p) {
+let feature;
+
+export function wrappedSketch(_feature) {
+  feature = _feature;
+  return sketch
+}
+
+function sketch(p) {
   let rotation = 0;
   var startx = 150;
   var starty = 150;
@@ -6,41 +13,9 @@ export default function sketch(p) {
 
   var faces = [];
 
-  faces.push({
-    eyeSize: 0,
-    eyeWidth: 0,
-    eyeColour: "#bf8040",
+  // 6776368481723648721634872136847162834
+  faces.push(feature);
 
-    pettalLength: 0,
-    pettalWidth: 0,
-    pettalColour: "#e6ffff",
-    pettalSpacing: 15,
-
-    mouth: true,
-
-    centerColour: "#ffffcc",
-    centerSize: 100
-  });
-  // p.addNewFace = function(mouth, pettalLength, pettalWidth, petalColour, petalSpacing) {
-  //   faces.push(
-  //     {
-  //     eyeSize : 0,
-  //     eyeWidth : 0,
-  //     eyeColour : '#bf8040',
-
-  //     pettalLength : pettalLength,
-  //     pettalWidth : pettalWidth,
-  //     pettalColour : pettalColour,
-  //     pettalSpacing : pettalSpacing,
-
-  //     mouth : mouth,
-
-  //     centerColour : '#ffffcc',
-  //     centerSize : 100,
-
-  //     }
-  //   );
-  // }
 
   p.setup = function() {
     p.createCanvas(300, 300, p.WEBGL);
@@ -53,7 +28,7 @@ export default function sketch(p) {
     }
   };
 
-  p.draw = function() {
+  p.draw = () => {
     p.clear();
     p.background("#b3ffb3");
     p.drawFace(startx, starty, i);
@@ -64,7 +39,7 @@ export default function sketch(p) {
     // p.pop();
   };
 
-  p.drawFace = function(x, y, i) {
+  p.drawFace = (x, y, i) => {
     p.drawPettal(
       0,
       0,
@@ -83,7 +58,7 @@ export default function sketch(p) {
       faces[i].mouth,
       faces[i].centerSize
     );
-    //  p.drawKawaii();
+    // p.drawKawaii();
   };
 
   p.modifyFaces = function() {
@@ -138,7 +113,7 @@ export default function sketch(p) {
   p.drawMouth = function(X, Y, colour, smile, size) {
     p.push();
     p.translate(X, Y);
-    // p.angleMode(Math.RADIANS);
+    p.angleMode(Math.RADIANS);
     p.stroke(colour);
     // console.log(smile);
     if (smile) {
@@ -146,8 +121,8 @@ export default function sketch(p) {
     } else {
       p.noFill();
     }
-    p.ellipse(0,size/5,size/5,size/25);
-    //  p.angleMode(Math.DEGREES);
+    //  arc(0,size/5,size/5,size/5, 0, Math.PI);
+    p.angleMode(Math.DEGREES);
     p.pop();
   };
 
