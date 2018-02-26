@@ -38,7 +38,7 @@ contract Voting {
 
     // resets round timer (Round = 3 minutes)
     function resetRoundTimer() private returns (uint) {
-        roundClosingTime = now + 5 seconds;
+        roundClosingTime = now + 15 seconds;
         return roundClosingTime;
     }
 

@@ -1,4 +1,4 @@
-let feature;
+let feature
 
 export function wrappedSketch(_feature) {
   feature = _feature;
@@ -40,7 +40,7 @@ function sketch(p) {
 
   p.setup = function() {
     p.createCanvas(300, 300, p.WEBGL);
-    p.modifyFaces();
+    // p.modifyFaces();
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function(props) {

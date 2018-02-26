@@ -14,7 +14,7 @@ class App extends Component {
 
   count = 0;
   web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  contract = "0xbc902b68f6c2aeaf50a936b8235c8b5f342bcbca";
+  contract = "0x2e8811fdd4d5063ec78185026fe9edbd5e470e34";
 	
 abi = [
 	{
@@ -189,8 +189,8 @@ abi = [
 	// }
 
 	ShowEvolution = (idd) => {
-		
-		//console.log("ss" , this.myContractInstance.getCurrentEvolution(0,{ from: this.web3.eth.accounts[0] }));
+		// alert(idd);
+		console.log("ss" , this.myContractInstance.getCurrentEvolution(idd,{ from: this.web3.eth.accounts[0] }));
 		return this.myContractInstance.getCurrentEvolution(idd,{ from: this.web3.eth.accounts[0] });
 	}
 
